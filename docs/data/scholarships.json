@@ -1,0 +1,38 @@
+[
+  {
+    "id": "aus-awards-2026",
+    "name": "Australia Awards Scholarship (example)",
+    "provider": "Australian Government",
+    "level": "Postgraduate",
+    "eligible": "Citizens of Papua New Guinea; meet provider's academic and English requirements",
+    "deadline": "TBC — check provider page",
+    "link": "https://www.example.org/aus-awards",
+    "country": "Australia",
+    "description": "Long-term development scholarships for postgraduate study in Australia. (This is a placeholder entry — replace with official link and details.)",
+    "contact": "awards@example.org"
+  },
+  {
+    "id": "png-gov-bilateral-2026",
+    "name": "PNG Government Scholarship (example)",
+    "provider": "Department of Higher Education, PNG",
+    "level": "Undergraduate",
+    "eligible": "Papua New Guinean citizens; selection via national process",
+    "deadline": "Rolling / consult the Department",
+    "link": "https://www.example.org/png-gov-scholarship",
+    "country": "Papua New Guinea",
+    "description": "Government-funded scholarships administered domestically. (Replace with current program information.)",
+    "contact": "info@example.org"
+  },
+  {
+    "id": "regional-shortcourse-2026",
+    "name": "Pacific Short Course Fellowship (example)",
+    "provider": "Regional Partner",
+    "level": "Short Course",
+    "eligible": "Citizens of Pacific Island countries including PNG; typically mid-career professionals",
+    "deadline": "Varies by intake",
+    "link": "https://www.example.org/pacific-shortcourse",
+    "country": "Other",
+    "description": "Short-term professional development and training programs for Pacific participants.",
+    "contact": "training@example.org"
+  }
+]

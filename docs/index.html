@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scholarships for Papua New Guineans</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Scholarships open to Papua New Guineans</h1>
+      <p class="tagline">A community-maintained index of scholarships, fellowships and short courses PNG nationals can apply for. Filter, search and click through for details.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <input id="search" type="search" placeholder="Search by name, provider, or keyword" aria-label="Search scholarships" />
+      <select id="levelFilter" aria-label="Filter by level">
+        <option value="">All levels</option>
+        <option value="Undergraduate">Undergraduate</option>
+        <option value="Postgraduate">Postgraduate</option>
+        <option value="Short Course">Short Course</option>
+        <option value="Scholarship">Scholarship</option>
+      </select>
+      <select id="countryFilter" aria-label="Filter by country">
+        <option value="">Any country</option>
+        <option value="Australia">Australia</option>
+        <option value="New Zealand">New Zealand</option>
+        <option value="Papua New Guinea">Papua New Guinea</option>
+        <option value="Other">Other</option>
+      </select>
+    </section>
+
+    <section id="list" class="list" aria-live="polite">
+      <!-- Scholarship cards will be inserted here by script.js -->
+    </section>
+
+    <section class="footnote">
+      <p><strong>Note:</strong> This list is for informational purposes. Always confirm eligibility, deadlines and application instructions from the scholarship provider's official pages. Want to contribute? Update <code>docs/data/scholarships.json</code> in the repository and open a pull request.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>Maintained by the BRIDGES community • Repository: <code>yapenarej/BRIDGES2026_SampleRepo</code></small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

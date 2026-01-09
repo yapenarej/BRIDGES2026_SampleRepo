@@ -1,0 +1,109 @@
+:root{
+  --bg:#f7f9fb;
+  --card:#ffffff;
+  --accent:#0b69ff;
+  --muted:#666;
+  --container-width:960px;
+  --radius:8px;
+  --gap:16px;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#0b2447;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+.container{
+  width:95%;
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:24px 0;
+}
+
+.site-header{
+  background:linear-gradient(90deg,#07203f 0%, #053063 100%);
+  color:white;
+  padding:28px 0;
+}
+.site-header h1{margin:0 0 6px 0; font-size:1.6rem}
+.tagline{margin:0; opacity:.9}
+
+.controls{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:18px 0;
+  align-items:center;
+}
+.controls input[type="search"]{
+  flex:1 1 320px;
+  padding:10px 12px;
+  border-radius:6px;
+  border:1px solid #d8e1ef;
+  background:white;
+}
+.controls select{
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #d8e1ef;
+  background:white;
+}
+
+.list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:var(--gap);
+  margin-top:12px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:0 1px 3px rgba(10,20,40,0.06);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.card h3{margin:0; font-size:1.05rem}
+.meta{font-size:.9rem; color:var(--muted)}
+.description{font-size:.95rem; color:#0b2447}
+.actions{
+  margin-top:auto;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.btn{
+  display:inline-block;
+  padding:8px 12px;
+  background:var(--accent);
+  color:white;
+  text-decoration:none;
+  border-radius:6px;
+  font-weight:600;
+}
+.secondary{
+  background:#eef4ff;
+  color:var(--accent);
+  border:1px solid #d9eaff;
+}
+
+.footnote{
+  margin-top:20px;
+  font-size:.95rem;
+  color:var(--muted);
+}
+
+.site-footer{
+  padding:18px 0;
+  border-top:1px solid #e6eef8;
+  margin-top:30px;
+  background:transparent;
+}
