@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPNG QR Attendance – S3</title>
+    <style>
+        /* -------------- 100 % SAME STYLING AS ORIGINAL -------------- */
+        body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f4f4f4}
+        .container{background:#fff;padding:40px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,.2);text-align:center;width:400px}
+        .logo-box{border:1px solid 
+
+#ddd;border-radius:20px;padding:10px 20px;display:inline-block;margin-bottom:20px;font-weight:bold;color:#d32f2f;font-size:18px;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+        .logo-box span{color:#1a237e}
+        .attendance-card{border:3px solid #000;padding:20px;text-align:left;position:relative}
+        h2{text-align:center;font-size:18px;margin-top:0;text-transform:uppercase}
+        .info-line{font-weight:bold;margin-bottom:8px;font-size:14px}
+        .info-value{font-weight:400;color:#333}
+        .input-section{margin-top:25px;text-align:center}
+        label{font-weight:bold;display:block;margin-bottom:5px;font-size:14px}
+
+        input[type="text"]{border:3px solid #000;padding:10px;font-size:18px;width:80%;text-align:center;font-weight:bold;letter-spacing:2px}
+        .btn-confirm{margin-top:15px;background:none;border:none;font-weight:bold;font-size:16px;cursor:pointer;text-transform:uppercase;padding:10px}
+        .btn-confirm:hover{text-decoration:underline}
+        #status-message{margin-top:15px;font-weight:bold;text-transform:uppercase;display:none;text-align:center}
+        .success{color:#2e7d32}
+        .error{color:#c62828}
+        .check-icon{font-size:30px;color:#2e7d32;vertical-align:middle;margin-left:10px;display:none}
+        .reset-btn{margin-top:20px;font-
+
+size:12px;color:gray;background:none;border:none;cursor:pointer;text-decoration:underline}
+        /* -------------- QR-SPECIFIC BITS -------------- */
+        #qrcode{display:none;margin:15px auto;width:180px;height:180px}
+        .countdown{font-size:12px;color:#555;margin-top:6px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-box">🏛️ <span>UPNG</span></div>
+
+        <div class="attendance-card">
+            <h2>QR Attendance</h2>
+            <div class="info-line">CLASS: <span class="info-value">1.30823 Data Structures & Algorithms</span></div>
+
+            <div class="info-line">BUILDING: <span class="info-value">S3 (Maths/CS Building)</span></div>
+            <div class="info-line">ROOM: <span class="info-value">Snr Lab</span></div>
+
+            <!-- QR code replaces the old keyboard input -->
+            <div class="input-section">
+                <label>SCAN CODE WITH PHONE</label>
+                <div id="qrcode"></div>
+                <div id="countdown" class="countdown"></div>
+                <button class="btn-confirm" onclick="generateQR()">Generate New Code</button>
+            </div>
+
+            <div id="status-message"></div>
+        </div>
+
+        <button class="reset-btn" onclick="resetForm()">Next Session</button>
+    </div>
+
+    <!-- QR library (Vanilla, 6 kB) -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script>
+        /* -------------- CONFIG -------------- */
+        const BASE_URL        = window.location.origin + window.location.pathname.replace('qr-attendance.html','') + 'login.html'; // page students see
+        const CODE_TTL        = 30;              // seconds
+        const POLL_INTERVAL   = 1500;            // ms
+
+        let currentCode = null;
+
+        let expiry      = null;
+        let pollTimer   = null;
+
+        /* -------------- TEACHER SIDE -------------- */
+        function generateQR(){
+            currentCode = String(Math.floor(100000 + Math.random()*900000)); // 6-digit
+            expiry      = Date.now() + CODE_TTL*1000;
+
+            const url = `${BASE_URL}?code=${currentCode}`;
+            document.getElementById('qrcode').style.display = 'block';
+            document.getElementById('qrcode').innerHTML = ''; // clear previous
+            new QRCode(document.getElementById('qrcode
+
+'), {text:url, width:180, height:180});
+
+            localStorage.removeItem('scanned_'+currentCode); //reset feedback flag
+            startCountdown();
+            startPolling();
+        }
+
+        function startCountdown(){
+            const cd = setInterval(()=>{
+                const left = Math.ceil((expiry - Date.now())/1000);
+                if(left<=0){ clearInterval(cd); generateQR(); } // auto-refresh
+                else document.getElementById('countdown').textContent = `Expires in ${left}s`;
+            },500);
+        }
+
+        function startPolling(){
+            if(pollTimer) clearInterval(pollTimer);
+            pollTimer = setInterval(()=>{
+                if(localStorage.getItem('scanned_'+currentCode)==='1'){
+                    clearInterval(pollTimer);
+                    showStatus('ATTENDANCE CONFIRMED','success');
+                    document.getElementById('checkIcon').style.display='inline';
+                }
+            },POLL_INTERVAL);
+        }
+
+        function showStatus(msg,type){
+            const box = document.getElementById('status-message');
+            box.textContent = msg;
+
+            box.className   = type;
+            box.style.display='block';
+        }
+
+        function resetForm(){
+            document.getElementById('qrcode').style.display='none';
+            document.getElementById('status-message').style.display='none';
+            document.getElementById('checkIcon').style.display='none';
+            if(pollTimer) clearInterval(pollTimer);
+        }
+    </script>
+</body>
+</html>
